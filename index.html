@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <header class="h-screen flex justify-center align-middle">
+        <section class="w-xl h-fit bg-stone-200 p-4">
+            <div class="w-fit block m-auto flex flex-col">
+                <label class="font-bold text-stone-700">Enter any</label>
+                <input type="text" id="val" class="bg-red-50 p-2 text-lg font-bold outline-none text-zinc-700">
+                <button id="btn" class="bg-sky-300 hover:bg-sky-400 mt-3">Save</button>
+            </div>
+            <h1 class="font-bold text-stone-700">Saved:</h1>
+            <ul id="shh">
+
+            </ul>
+        </section>
+    </header>
+
+    <script>
+        let store = [];
+
+        document.getElementById("btn").addEventListener("click", function(event){
+            event.preventDefault();
+            let inp = document.getElementById("val").value;
+
+            if(inp.trim() == ""){
+                return alert("Enter any "+inp);
+            }
+            store.push(inp);
+            load();
+            document.getElementById("val").value ="";
+        })
+        load();
+        function load(){
+            document.getElementById("shh").innerHTML ="";
+            store.reverse().forEach(function(d,i){
+                document.getElementById("shh").innerHTML +=`<div class="flex bg-stone-300 justify-between px-2 mb-2 py-2">
+                        <p>${d}</p>
+                        <p onclick="del(${i})">Delete</p>
+                    </div>`;
+            })
+        }
+        function del(i){
+            store.splice(i,1);
+            load();
+        }
+    </script>
+</body>
+</html>
