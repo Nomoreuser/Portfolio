@@ -22,7 +22,7 @@
     </header>
 
     <script>
-        let store = [];
+        let store = JSON.parse(localStorage.getItem('dd')) || [];
 
         document.getElementById("btn").addEventListener("click", function(event){
             event.preventDefault();
@@ -32,6 +32,7 @@
                 return alert("Enter any "+inp);
             }
             store.push(inp);
+            localStorage.setItem('dd', JSON.stringify(store));
             load();
             document.getElementById("val").value ="";
         })
