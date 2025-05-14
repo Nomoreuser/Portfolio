@@ -48,6 +48,7 @@
         }
         function del(i){
             store.splice(i,1);
+            localStorage.setItem('dd', JSON.stringify(store));
             load();
         }
     </script>
